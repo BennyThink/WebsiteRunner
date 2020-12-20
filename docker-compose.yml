@@ -14,8 +14,6 @@ services:
       context: docker/typecho/
       dockerfile: Dockerfile
     restart: on-failure
-    ports:
-    - 127.0.0.1:8000:80
     volumes:
     - ./www/www.tougetu.com:/var/www/html
 
@@ -24,13 +22,17 @@ services:
       context: docker/piwigo/
       dockerfile: Dockerfile
     restart: on-failure
-    ports:
-      - 127.0.0.1:8001:80
     volumes:
       - ./www/gakki.photos:/var/www/html
 
   ipv4:
     image: bennythink/ipv4.fail
     restart: on-failure
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./conf:/etc/nginx/conf.d
     ports:
-      - 127.0.0.1:8002:6789
+      - 80:80
+      - 443:443
