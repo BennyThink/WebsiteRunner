@@ -10,7 +10,9 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
 
   typecho:
-    image: php:7.3-apache
+    build:
+      context: .
+      dockerfile: docker/php7.3-apache/Dockerfile
     restart: on-failure
     ports:
     - 127.0.0.1:8000:80
