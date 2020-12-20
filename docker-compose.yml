@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+
+  typecho:
+    image: php:7.3-apache
+    restart: on-failure
+    ports:
+    - 8000:80
+    volumes:
+    - ./wwwroot/www.tougetu.com:/var/www/html
+
+  piwigo:
+    image: php:7.3-apache
+    restart: on-failure
+    ports:
+      - 8001:80
+    volumes:
+      - ./wwwroot/gakki.photos:/var/www/html
+
+  ipv4:
+    image: bennythink/ipv4.fail
+    restart: on-failure
+    ports:
+      - 8002:6789
