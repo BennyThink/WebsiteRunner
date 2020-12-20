@@ -11,8 +11,8 @@ services:
 
   typecho:
     build:
-      context: .
-      dockerfile: docker/php7.3-apache/Dockerfile
+      context: docker/php7.3-apache/
+      dockerfile: Dockerfile
     restart: on-failure
     ports:
     - 127.0.0.1:8000:80
