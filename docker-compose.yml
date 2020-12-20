@@ -13,7 +13,7 @@ services:
     image: php:7.3-apache
     restart: on-failure
     ports:
-    - 8000:80
+    - 127.0.0.1:8000:80
     volumes:
     - ./www/www.tougetu.com:/var/www/html
 
@@ -21,7 +21,7 @@ services:
     image: php:7.3-apache
     restart: on-failure
     ports:
-      - 8001:80
+      - 127.0.0.1:8001:80
     volumes:
       - ./www/gakki.photos:/var/www/html
 
@@ -29,4 +29,4 @@ services:
     image: bennythink/ipv4.fail
     restart: on-failure
     ports:
-      - 8002:6789
+      - 127.0.0.1:8002:6789
