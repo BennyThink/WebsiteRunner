@@ -11,7 +11,7 @@ services:
 
   typecho:
     build:
-      context: docker/php7.3-apache/
+      context: docker/typecho/
       dockerfile: Dockerfile
     restart: on-failure
     ports:
@@ -20,7 +20,9 @@ services:
     - ./www/www.tougetu.com:/var/www/html
 
   piwigo:
-    image: php:7.3-apache
+    build:
+      context: docker/piwigo/
+      dockerfile: Dockerfile
     restart: on-failure
     ports:
       - 127.0.0.1:8001:80
