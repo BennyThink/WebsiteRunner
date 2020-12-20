@@ -33,6 +33,7 @@ services:
     image: nginx:alpine
     volumes:
       - ./conf:/etc/nginx/conf.d
+      - /home/photos:/usr/share/nginx/html/photos
     ports:
       - 80:80
       - 443:443
