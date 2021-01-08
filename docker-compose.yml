@@ -13,7 +13,7 @@ services:
     build:
       context: docker/typecho/
       dockerfile: Dockerfile
-    restart: on-failure
+    restart: always
     volumes:
     - ./www/www.tougetu.com:/var/www/html
 
@@ -21,15 +21,16 @@ services:
     build:
       context: docker/piwigo/
       dockerfile: Dockerfile
-    restart: on-failure
+    restart: always
     volumes:
       - ./www/gakki.photos:/var/www/html
 
   ipv4:
     image: bennythink/ipv4.fail
-    restart: on-failure
+    restart: unless-stopped
 
   nginx:
+    restart: always
     image: nginx:alpine
     volumes:
       - ./conf:/etc/nginx/conf.d
