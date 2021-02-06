@@ -1,6 +1,14 @@
 version: '3.1'
 
 services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ./mongo_data/mongodb:/data/db
+    logging:
+      driver: none
+
   db:
     image: mysql:8.0
     restart: always
@@ -15,7 +23,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-    - ./www/www.tougetu.com:/var/www/html
+      - ./www/www.tougetu.com:/var/www/html
 
   piwigo:
     build:
@@ -29,12 +37,21 @@ services:
     image: bennythink/ipv4.fail
     restart: unless-stopped
 
+  yyets-web:
+    image: bennythink/yyetsbot
+    restart: unless-stopped
+    environment:
+      - mongo=mongo
+    working_dir: /YYeTsBot/web/
+    command: [ "python3","server.py","-h=0.0.0.0" ]
+
   nginx:
     restart: always
     image: nginx:alpine
     volumes:
       - ./conf:/etc/nginx/conf.d
       - /home/photos:/usr/share/nginx/html/photos
+      - ./certs/:/etc/nginx/certs/
     ports:
       - 80:80
       - 443:443
