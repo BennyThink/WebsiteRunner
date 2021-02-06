@@ -1,3 +1,5 @@
 /.idea/*
 db_data/*
 www/*
+mongo_data/*
+certs/*
