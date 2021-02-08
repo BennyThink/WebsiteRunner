@@ -7,7 +7,7 @@ services:
     volumes:
       - ./mongo_data/mongodb:/data/db
     ports:
-      -  192.168.6.55:27017:27017
+      -  127.0.0.1:27017:27017
 
   db:
     image: mysql:8.0
