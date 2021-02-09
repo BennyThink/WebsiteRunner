@@ -9,6 +9,12 @@ services:
     ports:
       -  127.0.0.1:27017:27017
 
+  redis:
+    image: redis:alpine
+    restart: always
+    logging:
+      driver: none
+
   db:
     image: mysql:8.0
     restart: always
