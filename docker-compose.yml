@@ -46,10 +46,12 @@ services:
 
   yyets-web:
     image: bennythink/yyetsbot
-    restart: unless-stopped
+    restart: always
     environment:
       - mongo=mongo
     working_dir: /YYeTsBot/web/
+    volumes:
+      - ./yyets_mongodb_live.gz:/YYeTsBot/web/data/yyets_mongodb_live.gz
     command: [ "python3","server.py","-h=0.0.0.0" ]
 
   nginx:
