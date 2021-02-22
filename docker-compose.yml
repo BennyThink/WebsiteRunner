@@ -51,7 +51,7 @@ services:
       - mongo=mongo
     working_dir: /YYeTsBot/web/
     volumes:
-      - ./yyets_mongodb_live.gz:/YYeTsBot/web/data/yyets_mongodb_live.gz
+      - ./dump.gz:/YYeTsBot/web/data/dump.gz
     command: [ "python3","server.py","-h=0.0.0.0" ]
 
   nginx:
