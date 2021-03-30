@@ -54,6 +54,10 @@ services:
       - ./data:/YYeTsBot/web/data/
     command: [ "python3","server.py","-h=0.0.0.0" ]
 
+  gfw:
+    image: bennythink/gfw:overseas
+    restart: unless-stopped
+
   nginx:
     restart: always
     image: nginx:alpine
