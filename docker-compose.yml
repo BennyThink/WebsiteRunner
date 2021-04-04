@@ -49,6 +49,8 @@ services:
     restart: always
     environment:
       - mongo=mongo
+    env_file:
+      - conf/yyets.env
     working_dir: /YYeTsBot/web/
     volumes:
       - ./data:/YYeTsBot/web/data/
