@@ -3,3 +3,5 @@ db_data/*
 www/*
 mongo_data/*
 certs/*
+data/*
+conf/*.env
