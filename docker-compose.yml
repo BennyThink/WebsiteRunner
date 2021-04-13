@@ -7,8 +7,8 @@ services:
     volumes:
       - ./mongo_data/mongodb:/data/db
     ports:
-      -  127.0.0.1:27017:27017
-      -  192.168.6.55:27017:27017
+      - 127.0.0.1:27017:27017
+      - 192.168.6.55:27017:27017
 
   redis:
     image: redis:alpine
@@ -59,6 +59,14 @@ services:
   gfw:
     image: bennythink/gfw:overseas
     restart: unless-stopped
+
+  teletweet-web:
+    image: bennythink/teletweet
+    restart: always
+    env_file:
+      - conf/teletweet.env
+    working_dir: /TeleTweet/twauth-web
+    command: [ "python3","twauth.py","-h=0.0.0.0" ]
 
   nginx:
     restart: always
