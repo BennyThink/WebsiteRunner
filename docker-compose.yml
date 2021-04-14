@@ -29,6 +29,9 @@ services:
       context: docker/typecho/
       dockerfile: Dockerfile
     restart: always
+    depends_on:
+      - nginx
+      - db
     volumes:
       - ./www/www.tougetu.com:/var/www/html
 
@@ -37,12 +40,17 @@ services:
       context: docker/piwigo/
       dockerfile: Dockerfile
     restart: always
+    depends_on:
+      - nginx
+      - db
     volumes:
       - ./www/gakki.photos:/var/www/html
 
   ipv4:
     image: bennythink/ipv4.fail
     restart: unless-stopped
+    depends_on:
+      - nginx
 
   yyets-web:
     image: bennythink/yyetsbot
@@ -51,6 +59,10 @@ services:
       - mongo=mongo
     env_file:
       - conf/yyets.env
+    depends_on:
+      - mongo
+      - redis
+      - nginx
     working_dir: /YYeTsBot/web/
     volumes:
       - ./data:/YYeTsBot/web/data/
@@ -59,6 +71,8 @@ services:
   gfw:
     image: bennythink/gfw:overseas
     restart: unless-stopped
+    depends_on:
+      - nginx
 
   teletweet-web:
     image: bennythink/teletweet
@@ -66,6 +80,8 @@ services:
     env_file:
       - conf/teletweet.env
     working_dir: /TeleTweet/twauth-web
+    depends_on:
+      - nginx
     command: [ "python3","twauth.py","-h=0.0.0.0" ]
 
   nginx:
