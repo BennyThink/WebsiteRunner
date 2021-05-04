@@ -10,6 +10,8 @@ services:
       - 127.0.0.1:27017:27017
       - 192.168.6.55:27017:27017
       - 172.17.0.1:27017:27017
+    logging:
+      driver: none
 
   redis:
     image: redis:alpine
