@@ -1,41 +1,13 @@
 version: '3.1'
 
 services:
-  mongo:
-    image: mongo
-    restart: always
-    volumes:
-      - ./mongo_data/mongodb:/data/db
-    ports:
-      - 127.0.0.1:27017:27017
-      - 192.168.6.55:27017:27017
-      - 172.17.0.1:27017:27017
-    command: --quiet
-
-  redis:
-    image: redis:alpine
-    restart: always
-    logging:
-      driver: none
-
   db:
-    image: mysql:8.0
+    image: mysql/mysql-server:8.0
     restart: always
     volumes:
       - ./db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-
-  typecho:
-    build:
-      context: docker/typecho/
-      dockerfile: Dockerfile
-    restart: always
-    depends_on:
-      - nginx
-      - db
-    volumes:
-      - ./www/www.tougetu.com:/var/www/html
 
   piwigo:
     build:
@@ -47,44 +19,6 @@ services:
       - db
     volumes:
       - ./www/gakki.photos:/var/www/html
-
-  ipv4:
-    image: bennythink/ipv4.fail
-    restart: unless-stopped
-    depends_on:
-      - nginx
-
-  yyets-web:
-    image: bennythink/yyetsbot
-    restart: always
-    environment:
-      - mongo=mongo
-    env_file:
-      - conf/yyets.env
-    depends_on:
-      - mongo
-      - redis
-      - nginx
-    working_dir: /YYeTsBot/web/
-    volumes:
-      - ./data:/YYeTsBot/web/data/
-    command: [ "python3","server.py","-h=0.0.0.0" ]
-
-  gfw:
-    image: bennythink/gfw:overseas
-    restart: unless-stopped
-    depends_on:
-      - nginx
-
-  teletweet-web:
-    image: bennythink/teletweet
-    restart: always
-    env_file:
-      - conf/teletweet.env
-    working_dir: /TeleTweet/twauth-web
-    depends_on:
-      - nginx
-    command: [ "python3","twauth.py","-h=0.0.0.0" ]
 
   nginx:
     restart: always
