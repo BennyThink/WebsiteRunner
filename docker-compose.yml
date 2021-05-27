@@ -25,7 +25,6 @@ services:
     image: nginx:alpine
     volumes:
       - ./conf:/etc/nginx/conf.d
-      - /home/photos:/usr/share/nginx/html/photos
       - ./certs/:/etc/nginx/certs/
     ports:
       - 80:80
