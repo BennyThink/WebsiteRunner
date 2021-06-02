@@ -37,17 +37,6 @@ services:
     volumes:
       - ./www/www.tougetu.com:/var/www/html
 
-  piwigo:
-    build:
-      context: docker/piwigo/
-      dockerfile: Dockerfile
-    restart: always
-    depends_on:
-      - nginx
-      - db
-    volumes:
-      - ./www/gakki.photos:/var/www/html
-
   ipv4:
     image: bennythink/ipv4.fail
     restart: unless-stopped
