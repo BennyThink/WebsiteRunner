@@ -37,6 +37,17 @@ services:
     volumes:
       - ./www/www.tougetu.com:/var/www/html
 
+  piwigo:
+    build:
+      context: docker/piwigo/
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - nginx
+      - db
+    volumes:
+      - ./www/gakki.photos:/var/www/html
+
   ipv4:
     image: bennythink/ipv4.fail
     restart: unless-stopped
@@ -58,16 +69,6 @@ services:
     volumes:
       - ./data:/YYeTsBot/web/data/
     command: [ "python3","server.py","-h=0.0.0.0" ]
-
-  teletweet-web:
-    image: bennythink/teletweet
-    restart: always
-    env_file:
-      - conf/teletweet.env
-    working_dir: /TeleTweet/twauth-web
-    depends_on:
-      - nginx
-    command: [ "python3","twauth.py","-h=0.0.0.0" ]
 
   nginx:
     restart: always
