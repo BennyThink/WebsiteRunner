@@ -5,3 +5,4 @@ mongo_data/*
 certs/*
 data/*
 conf/*.env
+logs/
