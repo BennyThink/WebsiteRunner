@@ -87,6 +87,9 @@ services:
       - ./conf:/etc/nginx/conf.d
       - /home/photos:/usr/share/nginx/html/photos
       - ./certs/:/etc/nginx/certs/
+      - ./logs:/var/log/nginx/
     ports:
       - 80:80
       - 443:443
+    environment:
+      TZ: Asia/Shanghai
