@@ -48,6 +48,7 @@ services:
     restart: always
     environment:
       - mongo=mongo
+      - redis=redis
     env_file:
       - conf/yyets.env
     depends_on:
