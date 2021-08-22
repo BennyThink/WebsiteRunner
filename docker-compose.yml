@@ -57,7 +57,7 @@ services:
       - nginx
     working_dir: /YYeTsBot/yyetsweb/
     volumes:
-      - ./data:/YYeTsBot/yyetsweb/data/
+      - ./data:/YYeTsBot/yyetsweb/templates/data/
     command: [ "python3","server.py","-h=0.0.0.0" ]
 
   nginx:
