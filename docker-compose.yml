@@ -17,6 +17,8 @@ services:
     restart: always
     logging:
       driver: none
+    ports:
+     - "192.168.6.55:6379:6379"
 
   db:
     image: mysql:8.0
@@ -59,6 +61,7 @@ services:
     restart: always
     environment:
       - mongo=mongo
+      - redis=redis
     env_file:
       - conf/yyets.env
     depends_on:
@@ -67,18 +70,8 @@ services:
       - nginx
     working_dir: /YYeTsBot/yyetsweb/
     volumes:
-      - ./data:/YYeTsBot/yyetsweb/data/
+      - ./data:/YYeTsBot/yyetsweb/templates/data/
     command: [ "python3","server.py","-h=0.0.0.0" ]
-
-  teletweet-web:
-    image: bennythink/teletweet
-    restart: always
-    env_file:
-      - conf/teletweet.env
-    working_dir: /TeleTweet/twauth-web
-    depends_on:
-      - nginx
-    command: [ "python3","twauth.py","-h=0.0.0.0" ]
 
   nginx:
     restart: always
