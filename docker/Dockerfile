@@ -1,9 +1,9 @@
 FROM php:7.4-apache
 
-RUN apt-get update && apt-get install -y  libfreetype6-dev  libjpeg62-turbo-dev libpng-dev imagemagick
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  libfreetype6-dev  libjpeg62-turbo-dev libpng-dev imagemagick
 
-RUN docker-php-ext-install mysqli
-
+RUN docker-php-ext-install mysqli pdo pdo_mysql && a2enmod rewrite
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install -j$(nproc) gd
 

@@ -18,7 +18,7 @@ services:
     logging:
       driver: none
     ports:
-     - "192.168.6.55:6379:6379"
+      - "192.168.6.55:6379:6379"
 
   db:
     image: mysql:8.0
@@ -30,7 +30,7 @@ services:
 
   typecho:
     build:
-      context: docker/typecho/
+      context: docker
       dockerfile: Dockerfile
     restart: always
     depends_on:
@@ -41,7 +41,7 @@ services:
 
   piwigo:
     build:
-      context: docker/piwigo/
+      context: docker
       dockerfile: Dockerfile
     restart: always
     depends_on:
