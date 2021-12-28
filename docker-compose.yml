@@ -7,10 +7,12 @@ services:
     volumes:
       - ./mongo_data/mongodb:/data/db
     ports:
-      - 127.0.0.1:27017:27017
-      - 192.168.6.55:27017:27017
-      - 172.17.0.1:27017:27017
+      - "127.0.0.1:27017:27017"
+      - "192.168.6.55:27017:27017"
+      - "172.17.0.1:27017:27017"
     command: --quiet
+    logging:
+      driver: none
 
   redis:
     image: redis:alpine
@@ -27,6 +29,8 @@ services:
       - ./db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
+    logging:
+      driver: none
 
   typecho:
     build:
