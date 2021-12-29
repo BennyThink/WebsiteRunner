@@ -31,6 +31,8 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     logging:
       driver: none
+    ports:
+      - "192.168.6.55:3306:3306"
 
   typecho:
     build:
@@ -86,7 +88,7 @@ services:
       - ./certs/:/etc/nginx/certs/
       - ./logs:/var/log/nginx/
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     environment:
       TZ: Asia/Shanghai
