@@ -41,7 +41,7 @@ services:
     restart: always
     depends_on:
       - nginx
-      - db
+      - mysql
     volumes:
       - ./www/www.tougetu.com:/var/www/html
 
@@ -52,7 +52,7 @@ services:
     restart: always
     depends_on:
       - nginx
-      - db
+      - mysql
     volumes:
       - ./www/gakki.photos:/var/www/html
 
