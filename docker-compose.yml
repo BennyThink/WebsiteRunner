@@ -22,7 +22,7 @@ services:
     ports:
       - "192.168.6.55:6379:6379"
 
-  db:
+  mysql:
     image: mysql:8.0
     restart: always
     volumes:
