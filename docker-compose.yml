@@ -23,7 +23,7 @@ services:
       - "192.168.6.2:6379:6379"
 
   mysql:
-    image: mysql:8.0
+    image: ubuntu/mysql:8.0-20.04_beta
     restart: always
     volumes:
       - ./db_data:/var/lib/mysql
@@ -35,9 +35,7 @@ services:
       - "192.168.6.2:3306:3306"
 
   typecho:
-    build:
-      context: docker
-      dockerfile: Dockerfile
+    image: bennythink/php:7.4
     restart: always
     depends_on:
       - nginx
@@ -46,9 +44,7 @@ services:
       - ./www/www.tougetu.com:/var/www/html
 
   piwigo:
-    build:
-      context: docker
-      dockerfile: Dockerfile
+    image: bennythink/php:7.4
     restart: always
     depends_on:
       - nginx
