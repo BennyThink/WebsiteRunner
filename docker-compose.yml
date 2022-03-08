@@ -8,7 +8,7 @@ services:
       - ./mongo_data/mongodb:/data/db
     ports:
       - "127.0.0.1:27017:27017"
-      - "192.168.6.55:27017:27017"
+      - "192.168.6.2:27017:27017"
       - "172.17.0.1:27017:27017"
     command: --quiet
     logging:
@@ -20,7 +20,7 @@ services:
     logging:
       driver: none
     ports:
-      - "192.168.6.55:6379:6379"
+      - "192.168.6.2:6379:6379"
 
   mysql:
     image: mysql:8.0
@@ -32,7 +32,7 @@ services:
     logging:
       driver: none
     ports:
-      - "192.168.6.55:3306:3306"
+      - "192.168.6.2:3306:3306"
 
   typecho:
     build:
