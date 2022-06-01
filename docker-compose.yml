@@ -105,3 +105,5 @@ services:
 #      - ./conf/grafana.ini:/etc/grafana/grafana.ini
     ports:
       - "192.168.6.2:3000:3000"
+    environment:
+      GF_INSTALL_PLUGINS: grafana-image-renderer,grafana-piechart-panel,simpod-json-datasource
