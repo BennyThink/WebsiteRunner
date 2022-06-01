@@ -88,3 +88,20 @@ services:
       - "443:443"
     environment:
       TZ: Asia/Shanghai
+
+  influxdb:
+    restart: on-failure
+    image: influxdb:1.8.10
+    volumes:
+      - ./influxdb:/var/lib/influxdb
+    ports:
+      - "192.168.6.2:8086:8086"
+
+  grafana:
+    restart: on-failure
+    image: grafana/grafana:8.3.1
+    volumes:
+      - ./grafana:/var/lib/grafana
+#      - ./conf/grafana.ini:/etc/grafana/grafana.ini
+    ports:
+      - "192.168.6.2:3000:3000"
