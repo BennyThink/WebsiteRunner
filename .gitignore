@@ -6,3 +6,5 @@ certs/*
 data/*
 conf/*.env
 logs/
+influxdb/*
+grafana/*

@@ -71,8 +71,6 @@ services:
       - redis
       - nginx
     working_dir: /YYeTsBot/yyetsweb/
-    volumes:
-      - ./dump:/YYeTsBot/yyetsweb/templates/dump/
     command: [ "python3","server.py","-h=0.0.0.0" ]
 
   nginx:
