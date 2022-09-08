@@ -34,15 +34,6 @@ services:
     ports:
       - "192.168.6.2:3306:3306"
 
-  typecho:
-    image: bennythink/php:7.4
-    restart: always
-    depends_on:
-      - nginx
-      - mysql
-    volumes:
-      - ./www/www.tougetu.com:/var/www/html
-
   piwigo:
     image: bennythink/php:7.4
     restart: always
@@ -97,7 +88,7 @@ services:
 
   grafana:
     restart: on-failure
-    image: grafana/grafana:8.3.1
+    image: grafana/grafana:9.1.2
     volumes:
       - ./grafana:/var/lib/grafana
 #      - ./conf/grafana.ini:/etc/grafana/grafana.ini
