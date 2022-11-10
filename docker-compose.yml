@@ -33,6 +33,7 @@ services:
       driver: none
     ports:
       - "192.168.6.2:3306:3306"
+    command: "--skip-log-bin"
 
   piwigo:
     image: bennythink/php:7.4
