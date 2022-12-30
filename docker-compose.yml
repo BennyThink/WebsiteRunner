@@ -36,7 +36,7 @@ services:
     command: "--skip-log-bin"
 
   piwigo:
-    image: bennythink/php:7.4
+    image: bennythink/php:8.2
     restart: always
     depends_on:
       - nginx
@@ -77,7 +77,7 @@ services:
       - "80:80"
       - "443:443"
     environment:
-      TZ: Asia/Shanghai
+      TZ: Europe/Stockholm
 
   influxdb:
     restart: on-failure
