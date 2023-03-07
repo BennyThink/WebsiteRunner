@@ -42,6 +42,7 @@ services:
       - "443:443"
     environment:
       TZ: Europe/Stockholm
+    container_name: nginx
 
   influxdb:
     restart: on-failure
