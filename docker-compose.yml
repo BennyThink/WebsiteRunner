@@ -1,27 +1,6 @@
 version: '3.1'
 
 services:
-  mongo:
-    image: mongo:6
-    restart: always
-    volumes:
-      - ./mongo_data/mongodb:/data/db
-    ports:
-      - "127.0.0.1:27017:27017"
-      - "192.168.6.2:27017:27017"
-      - "172.17.0.1:27017:27017"
-    command: --quiet
-    logging:
-      driver: none
-
-  redis:
-    image: redis:7-alpine
-    restart: always
-    logging:
-      driver: none
-    ports:
-      - "192.168.6.2:6379:6379"
-
   mysql:
     image: ubuntu/mysql:8.0-22.04_beta
     restart: always
@@ -32,7 +11,7 @@ services:
     logging:
       driver: none
     ports:
-      - "192.168.6.2:3306:3306"
+      - "172.17.0.1:3306:3306"
     command: "--skip-log-bin"
 
   piwigo:
@@ -49,21 +28,6 @@ services:
     restart: unless-stopped
     depends_on:
       - nginx
-
-  yyets-web:
-    image: bennythink/yyetsbot
-    restart: always
-    environment:
-      - mongo=mongo
-      - redis=redis
-    env_file:
-      - conf/yyets.env
-    depends_on:
-      - mongo
-      - redis
-      - nginx
-    working_dir: /YYeTsBot/yyetsweb/
-    command: [ "python3","server.py","-h=0.0.0.0" ]
 
   nginx:
     restart: always
