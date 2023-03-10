@@ -18,7 +18,6 @@ services:
     image: bennythink/php:8.2
     restart: always
     depends_on:
-      - nginx
       - mysql
     volumes:
       - ./www/gakki.photos:/var/www/html
@@ -28,8 +27,6 @@ services:
   ipv4:
     image: bennythink/ipv4.fail
     restart: unless-stopped
-    depends_on:
-      - nginx
     ports:
       - "127.0.0.1:10001:6789"
 
