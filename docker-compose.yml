@@ -11,7 +11,7 @@ services:
     logging:
       driver: none
     ports:
-      - "172.17.0.1:3306:3306"
+      - "127.0.0.1:3306:3306"
     command: "--skip-log-bin"
 
   piwigo:
@@ -22,27 +22,27 @@ services:
       - mysql
     volumes:
       - ./www/gakki.photos:/var/www/html
+    ports:
+      - "127.0.0.1:10000:80"
 
   ipv4:
     image: bennythink/ipv4.fail
     restart: unless-stopped
     depends_on:
       - nginx
+    ports:
+      - "127.0.0.1:10001:6789"
 
-  nginx:
-    restart: always
+  bot:
+    restart: on-failure
     image: nginx:stable-alpine
     volumes:
       - ./conf:/etc/nginx/conf.d
       - /home/photos:/usr/share/nginx/html/photos
-      - ./certs/:/etc/nginx/certs/
-      - ./logs:/var/log/nginx/
     ports:
-      - "80:80"
-      - "443:443"
+      - "127.0.0.1:10002:80"
     environment:
       TZ: Europe/Stockholm
-    container_name: nginx
 
   influxdb:
     restart: on-failure
@@ -57,8 +57,7 @@ services:
     image: grafana/grafana:9.1.2
     volumes:
       - ./grafana:/var/lib/grafana
-#      - ./conf/grafana.ini:/etc/grafana/grafana.ini
     ports:
-      - "172.17.0.1:3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       GF_INSTALL_PLUGINS: grafana-piechart-panel,simpod-json-datasource
