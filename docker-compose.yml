@@ -55,6 +55,6 @@ services:
     volumes:
       - ./grafana:/var/lib/grafana
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:13000:3000"
     environment:
       GF_INSTALL_PLUGINS: grafana-piechart-panel,simpod-json-datasource
