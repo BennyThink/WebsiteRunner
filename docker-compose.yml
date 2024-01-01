@@ -40,25 +40,3 @@ services:
       - "127.0.0.1:10002:80"
     environment:
       TZ: Europe/Stockholm
-
-  influxdb:
-    restart: always
-    image: influxdb:1.8.10
-    volumes:
-      - influxdb:/var/lib/influxdb
-    ports:
-      - "192.168.6.2:8086:8086"
-
-  grafana:
-    user: root
-    restart: unless-stopped
-    image: grafana/grafana:9.1.2
-    volumes:
-      - ./grafana:/var/lib/grafana
-    ports:
-      - "127.0.0.1:13000:3000"
-    environment:
-      GF_INSTALL_PLUGINS: grafana-piechart-panel,simpod-json-datasource
-
-volumes:
-  influxdb:
